@@ -85,12 +85,13 @@ private:
  * --------------------------
  * The Stack is internally managed using a Vector.  */
 
-/* Internal array "elements" */
+/* Internal array "elements" is declared yet as a class field */
 template <typename ValueType>
 MyStack<ValueType>::MyStack() {
 
 }
 
+/* Internal array "elements" is deleted due to Vector class methods */
 template <typename ValueType>
 MyStack<ValueType>::~MyStack() {
 
