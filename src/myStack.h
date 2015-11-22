@@ -81,13 +81,11 @@ private:
 };
 
 /*
- * Stack class implementation
+ * Stack class implementation notes
  * --------------------------
- * The Stack is internally managed using a Vector.  This layered design
- * makes the implementation extremely simple, to the point that most
- * methods can be implemented in as single line.
- */
+ * The Stack is internally managed using a Vector.  */
 
+/* Internal array "elements" */
 template <typename ValueType>
 MyStack<ValueType>::MyStack() {
 
