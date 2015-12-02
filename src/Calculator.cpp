@@ -1,9 +1,11 @@
-﻿/*
+﻿/********************************************************************************************
  * File: Calculator.cpp
- * ---------------
- * Programm gets formula string from user in console, and clculates
+ * ----------------------
+ * v.1 2015/11/22
+ * Program gets formula string from user in console, and clculates
  * it's due to Shunting-Yard algorythm.
- */
+ ********************************************************************************************/
+
 #include <iostream>
 #include <cmath>
 #include "console.h"
@@ -13,7 +15,9 @@
 
 using namespace std;
 
-/* Functions prototypes */
+
+/* Declarations
+ * -----------------------------------------------------------------------------------------*/
 void scanCPlusPlusTokens(TokenScanner & scanner);
 
 double formulaProcess(string formula, double xValue);
@@ -34,10 +38,14 @@ double powFunction(TokenScanner& scanner);
 double sqrtFunction(TokenScanner& scanner, double xValue);
 
 /* Global variable: failFlag
- * -----------------------------------------------------------------------------------------//
+ * --------------------------
  * Rises if there are some fails are obtained during program.
  * It's used globaly to sipmlifies code. */
 bool failFlag = false;
+
+/*------------------------------------------------------------------------------------------//
+ * Implementation section.
+ * -----------------------------------------------------------------------------------------*/
 
 int main() {
     while(true){
@@ -299,8 +307,6 @@ double sqrtFunction(TokenScanner& scanner, double xValue){
     /* Returns sqrt function result */
     return sqrt(num1);
 }
-
-
 
 /* Function: twoNumsProcess()
  * Usage: is called by sortTokenByStacks() or getFinalStacksResult() functions

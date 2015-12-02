@@ -1,8 +1,9 @@
-/*
+/********************************************************************************************
  * File: myStack.h
- * -------------
- * This file implements stack function based on the internal Vector
- */
+ * ----------------------
+ * v.1 2015/11/27
+ * This file implements simple stack structure.
+ ********************************************************************************************/
 
 #ifndef _myStack_h
 #define _myStack_h
@@ -12,11 +13,19 @@
 
 /*
  * Class: MyStack<ValueType>
- * -----------------------
+ * -------------------------
+ * Implements stack structure based on the internal Vector.
+ * The top of the stack is the last added vector value.
  */
 template <typename ValueType>
 class MyStack {
+
+/* -----------------------------------------------------------------------------------------//
+ * Interface section
+ * -----------------------------------------------------------------------------------------*/
+
 public:
+
     /*
      * Constructor: MyStack
      * Usage: MyStack<ValueType> stack;
@@ -37,7 +46,6 @@ public:
      * Usage: stack.push(value);
      * -------------------------
      * Pushes the specified value onto the top of this stack.
-     * A synonym for the push method.
      */
     void push(const ValueType& value);
     
@@ -45,7 +53,7 @@ public:
      * Method: isEmpty
      * Usage: if (stack.isEmpty()) ...
      * -------------------------------
-     * Returns <code>true</code> if this stack contains no elements.
+     * Returns true if this stack contains no elements.
      */
     bool isEmpty() const;
     
@@ -62,8 +70,8 @@ public:
      * Method: peek
      * Usage: ValueType top = stack.peek();
      * ------------------------------------
-     * Returns the value of top element from this stack, without removing
-     * it.  This method signals an error if called on an empty stack.
+     * Returns the value of top element from this stack, without removing it.
+     * This method signals an error if called on an empty stack.
      */
     ValueType peek() const;
 
@@ -75,26 +83,56 @@ public:
      */
     int size() const;
 
-    /* Private section */    
+/* -----------------------------------------------------------------------------------------//
+ * Private section
+ * -----------------------------------------------------------------------------------------*/
 private:
-    Vector<ValueType> elements; 
+    /*
+     * Implementation notes: myStack internal structure
+     * --------------------------------------------------
+     * The Stack is internally managed using an internal
+     * Vector structure. So, there are no needs in memory
+     * management or deep coping problems
+     * The top of the stack is the last added to vector value.
+     */
+
+    /* Instance variables */
+
+    Vector<ValueType> elements; /* Main internal storage structure */
 };
 
-/*
- * Stack class implementation notes
- * --------------------------
- * The Stack is internally managed using a Vector.  */
+/* -----------------------------------------------------------------------------------------//
+ * Implementation section
+ * -----------------------
+ * As the class is templated, the implementation part has
+ * to be written in the same header with interface.
+ * -----------------------------------------------------------------------------------------*/
 
-/* Internal array "elements" is declared yet as a class field */
+/*
+ * Implementation notes: myStack constructor
+ * ------------------------------------------
+ * Internal array "elements" is declared yet as a class field
+ * so there are no needs to initiate some other fields.
+ */
 template <typename ValueType>
 MyStack<ValueType>::MyStack() {
 
 }
 
-/* Internal array "elements" is deleted due to Vector class methods */
+/*
+ * Implementation notes: myStack destructor
+ * ----------------------------------------
+ * Internal array "elements" is deleted due to Vector class methods,
+ * so there are no needs to control any else memory.
+ */
 template <typename ValueType>
 MyStack<ValueType>::~MyStack() {
 
+}
+
+template <typename ValueType>
+void MyStack<ValueType>::push(const ValueType &value) {
+    elements.add(value);
 }
 
 template <typename ValueType>
@@ -102,6 +140,12 @@ bool MyStack<ValueType>::isEmpty() const {
     return elements.size() == 0;
 }
 
+/*
+ * Implementation notes: pop
+ * --------------------------
+ * Removes the last element from vector, so vector size management
+ * is controled by vector class methods.
+ */
 template <typename ValueType>
 ValueType MyStack<ValueType>::pop() {
     if (isEmpty()) {
@@ -110,11 +154,6 @@ ValueType MyStack<ValueType>::pop() {
     ValueType top = elements[elements.size() - 1];
     elements.remove(elements.size() - 1);
     return top;
-}
-
-template <typename ValueType>
-void MyStack<ValueType>::push(const ValueType &value) {
-    elements.add(value);
 }
 
 template <typename ValueType>
